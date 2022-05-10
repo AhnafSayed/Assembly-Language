@@ -1,0 +1,54 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+     CR EQU 0DH
+     LF EQU 0AH
+     
+MSG1 DB 'ENTER A LOWER CASE LETTER: $'                  ;Name: Ahnaf Sayed   Id: 18-36920-1
+MSG2 DB 0DH,0AH,'IN UPPER CASE IT IS: '
+CHAR1 DB ?,'$' 
+MSG3 DB 'ENTER A UPPER CASE LETTER: $'
+MSG4 DB 0DH,0AH,'IN LOWER CASE IT IS: '  
+CHAR2 DB ?,'$' 
+.CODE
+MAIN PROC
+    
+    MOV AX,@DATA
+    MOV DS,AX
+    
+    LEA DX,MSG1
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    SUB AL,20H
+    MOV CHAR1,AL
+    
+    LEA DX,MSG2
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,2
+    MOV DL,0DH
+    INT 21H
+    MOV DL,0AH
+    INT 21H
+    
+    LEA DX,MSG3
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    ADD AL,20H
+    MOV CHAR2,AL
+    
+    LEA DX,MSG4
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,4CH
+    INT 21H
+MAIN ENDP
+END MAIN
